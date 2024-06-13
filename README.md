@@ -1,5 +1,5 @@
 Dockerfile
-Le Dockerfile ne nécessite pas de modifications majeures, mais nous pouvons ajouter quelques améliorations mineures comme l'installation explicite de gunicorn.
+Le Dockerfile pour créer l'image Docker de l'application.
 
 Dockerfile
 Copier le code
@@ -71,7 +71,7 @@ Cette application est un exemple d'utilisation de FastAPI avec une base de donn�
 - `Dockerfile` : Fichier de configuration Docker
 - `k8s/` : Fichiers de configuration Kubernetes
 main.py
-Le fichier Python main.py.
+Le fichier Python contenant le code de l'application FastAPI.
 
 python
 Copier le code
@@ -101,7 +101,7 @@ def set_item(key: str, value: str):
     redis_client.set(key, value)
     return {"message": "Item set successfully", "key": key, "value": value}
 requirements.txt
-Le fichier requirements.txt.
+Le fichier de dépendances Python.
 
 makefile
 Copier le code
@@ -200,4 +200,20 @@ spec:
   - port: 6379
     targetPort: 6379
   type: ClusterIP
-Avec ces fichiers et cette structure, votre projet sera bien o
+k8s/fastapi-service.yaml
+Le fichier de service Kubernetes pour FastAPI.
+
+yaml
+Copier le code
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-redis-service
+spec:
+  selector:
+    app: fastapi-redis
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  type: ClusterIP
