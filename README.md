@@ -57,6 +57,9 @@ fastapi==0.95
 redis==5.0.1
 uvicorn==0.24.0
   ```
+
+fastapi-deployment.yaml
+
   ```sh
 fastapi-deployment.yaml
 apiVersion: apps/v1
@@ -148,10 +151,9 @@ spec:
   type: ClusterIP
   ```
 
+fastapi-redis-service.yaml
+
   ```sh
-fastapi-service.yaml
-
-
 apiVersion: v1
 kind: Service
 metadata:
